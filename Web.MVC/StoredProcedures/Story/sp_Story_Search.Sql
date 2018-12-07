@@ -34,9 +34,10 @@ Begin
 	
 	DECLARE @selectSQL NVARCHAR(MAX)
 	SET @selectSQL = N'
-		SELECT * FROM Story
+		SELECT [Story].*,[Status].Name as StatusName FROM Story
+		LEFT JOIN [Status] on [Status].StatusId = [Story].StatusId
 	'
-	+ @where + '  ORDER BY [Story].StoryId desc OFFSET @CurrentPage ROWS FETCH NEXT @PageSize ROWS ONLY '
+	+ @where + '  ORDER BY [Story].WriteDate desc OFFSET @CurrentPage ROWS FETCH NEXT @PageSize ROWS ONLY '
 
 	EXECUTE sp_executesql
 	@selectSQL,

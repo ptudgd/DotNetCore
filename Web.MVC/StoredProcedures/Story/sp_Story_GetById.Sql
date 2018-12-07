@@ -10,7 +10,9 @@ begin
 	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 	---------------------------------------------------
 
-	SELECT * FROM Story WHERE [Story].StoryId = @StoryId
+	SELECT [Story].*,Status.Name as StatusName FROM Story 
+	LEFT JOIN Status on Status.StatusId = Story.StatusId
+	WHERE [Story].StoryId = @StoryId
 
 	---------------------------------------------------
 	SET NOCOUNT OFF;

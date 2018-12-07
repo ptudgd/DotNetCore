@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+/* --- truyen.css --- */
+
+.pageWidth{
+	width:100%; !important;
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+.pageContent{
+	width:100%; !important;
+	margin-left: 0 !important;
+	padding: 0 !important;
+}

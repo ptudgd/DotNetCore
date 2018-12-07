@@ -22,4 +22,10 @@
     <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ClientApp\public\img\" />
+    <Folder Include="ClientApp\public\styles\truyen\css\fonts\" />
+    <Folder Include="ClientApp\public\styles\truyen\css\github.com\necolas\" />
+  </ItemGroup>
+
 </Project>
