@@ -1,8 +1,8 @@
 ﻿
-IF object_id('sp_Story_Search') IS NULL
-    EXEC ('create procedure sp_Story_Search as select 1')
+IF object_id('sp_Story_SearchOrderByView') IS NULL
+    EXEC ('create procedure sp_Story_SearchOrderByView as select 1')
 GO
-ALTER PROCEDURE [dbo].sp_Story_Search
+ALTER PROCEDURE [dbo].sp_Story_SearchOrderByView
 (
 @Total int out,
 @CurrentPage int = 1,
@@ -37,7 +37,7 @@ Begin
 		SELECT [Story].*,[Status].Name as StatusName FROM Story
 		LEFT JOIN [Status] on [Status].StatusId = [Story].StatusId
 	'
-	+ @where + '  ORDER BY [Story].WriteDate desc OFFSET @CurrentPage ROWS FETCH NEXT @PageSize ROWS ONLY '
+	+ @where + '  ORDER BY [Story].[View] desc OFFSET @CurrentPage ROWS FETCH NEXT @PageSize ROWS ONLY '
 
 	EXECUTE sp_executesql
 	@selectSQL,
@@ -50,13 +50,15 @@ Begin
 	@CurrentPage, @PageSize,@QuickSearch
 
 	declare @countSQL nvarchar(500)
-	set @countSQL = N'SELECT @Total = COUNT(1) FROM [Story]' + @where
+	set @countSQL = N'SELECT @Total = COUNT(*) FROM [Story] with(NoLock, ReadUncommitted)' + @where
+
 	execute sp_executesql
 	@countSQL,
 	N'@Total INT OUT,
 	
 	@QuickSearch nvarchar(500)',
 	@Total OUT,@QuickSearch
+
 	---------------------------------------------------
 	SET NOCOUNT OFF;
 End

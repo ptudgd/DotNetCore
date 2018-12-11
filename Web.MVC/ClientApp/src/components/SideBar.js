@@ -5,18 +5,21 @@ export class SideBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Category: ["Tiên hiệp", "Xuyên không"],
-            StoryHot:[]
+            Category: [],
+            StoryHot: [],
+            StoryNew:[]
         };
     }
     componentDidMount() {
-        fetch("/Story/Search?ActionCmd.PageSize=6")
+        fetch("/Config/SideBar")
             .then(res => res.json())
             .then((result) => {
-                console.log(result);
+                var data = result.data;
                 this.setState({
                     isLoaded: true,
-                    StoryHot: result.data.data
+                    Category: data.category,
+                    StoryHot: data.storyHot,
+                    StoryNew: data.storyNew
                 });
             }
             );
@@ -32,12 +35,12 @@ export class SideBar extends Component {
                 </div>
                 <div className="w3-col s12 m12 l12 sidebar-tags">
                     <div className="w3-row">
+                        
                         {
-                            this.state.Category.map((item) => {
-                                return <div className="w3-col s6 m6 l6"><a className="w3-text-red" href="#" title={item}>{item}</a></div>;
+                            this.state.Category.map(function (item,key) {
+                                return <div key={key} className="w3-col s6 m6 l6"><a href={"/Category/" + item.CategoryId} className="w3-text-red"  title={item.Name}>{item.Name}</a></div>;
                             })
                         }
-                        
                         
                     </div>
                 </div>
@@ -46,12 +49,12 @@ export class SideBar extends Component {
                     <div className="sidebar-content">
                         {
                             this.state.StoryHot.map((item,key) => {
-                                return <div className="row">
+                                return <div className="row" key={key}>
                                     <div className="w3-left row-thumbnail">
                                         <span className="w3-btn-floating icon-number">{key + 1}</span>
                                     </div>
                                     <div className="row-caption">
-                                        <h3 itemProp="name"><a title={item.Name} href="#" itemProp="url">{item.Name}</a></h3>
+                                        <h3 itemProp="name"><a href={"/Story/" + item.StoryId} title={item.Name}  itemProp="url">{item.Name}</a></h3>
                                         <span className="row-chapter"><a href="/" title={item.Name}>{item.Name}</a></span>
                                     </div>
                                 </div>
@@ -67,12 +70,12 @@ export class SideBar extends Component {
                     <div className="sidebar-title"><h2>Truyện mới đăng</h2></div>
                     <div className="sidebar-content">
                         {
-                            this.state.StoryHot.map(function (item) {
-                                return <div className="row">
+                            this.state.StoryNew.map(function (item,key) {
+                                return <div className="row" key={key}>
                                     <div className="w3-left row-thumbnail"><span className="w3-btn-floating icon-text">NEW</span></div>
                                     <div className="row-caption">
-                                        <h3 itemProp="name"><a title={item.Name} href="#" itemProp="url">{item.Name}</a></h3>
-                                        <span className="row-chapter"><a href="#" title={item.Name}>{item.Name}</a>, <a  href="#" title="Sắc">Sắc</a></span>
+                                        <h3 itemProp="name"><a title={item.Name}  itemProp="url">{item.Name}</a></h3>
+                                        <span className="row-chapter"><a  title={item.Name}>{item.Name}</a>, <a   title="Sắc">Sắc</a></span>
                                     </div>
                                 </div>;
                             })

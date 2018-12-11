@@ -7,19 +7,18 @@ IF object_id('sp_Content_Insert') IS NULL
     EXEC ('create procedure sp_Content_Insert as select 1')
 GO
 ALTER proc [dbo].sp_Content_Insert
-@ContentId bigint out,
+@ChapterId bigint out,
 @StoryId bigint,
-@Content nvarchar(max)
+@Text nvarchar(max)
 as
 begin
-	SELECT @ContentId = isnull(MAX(ContentId),0) + 1 from [Content] WHERE [Content].StoryId = @StoryId;
 INSERT INTO [dbo].[Content]
-           ([ContentId]
+           ([ChapterId]
            ,[StoryId]
-           ,[Content])
+           ,[Text])
      VALUES
-           (@ContentId
+           (@ChapterId
            ,@StoryId
-           ,@Content)
+           ,@Text)
 
 end

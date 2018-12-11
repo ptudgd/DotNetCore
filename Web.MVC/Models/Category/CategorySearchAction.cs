@@ -21,13 +21,11 @@ namespace Web.MVC.Models
         }
         protected override Result<dynamic> ExecuteCore()
         {
-            var result = Success(Query.QuerySet<dynamic>("sp_Category_Search", this));
+            var result = Query.QuerySet<dynamic>("sp_Category_Search", this);
             
             return Success(new
             {
-                IsSuccess = result.IsSuccess,
-                Data = result.Data,
-                Message = result.Message,
+                Data = result,
                 Total = this.Total,
                 ItemPerPage = this.PageSize,
                 TotalPage = Math.Ceiling(Convert.ToDecimal(this.Total) / Convert.ToDecimal(this.PageSize))

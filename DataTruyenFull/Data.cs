@@ -37,118 +37,173 @@ namespace DataTruyenFull
         }
         private dynamic GetInfo(string Url)
         {
-            HtmlDocument htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(this.GetHTML(Url));
-            var Title = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col m8 l8 w3-container w3-center detail-right']/h1/a").FirstOrDefault().InnerText;
-            var Image = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s4 m12 l12 detail-thumbnail']/img").FirstOrDefault().Attributes["src"].Value;
-            var Author = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s8 m12 l12 detail-info']/ul/li/h2/a").FirstOrDefault().InnerText;
-            var Decription = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-justify summary']").FirstOrDefault().FirstChild.InnerHtml;
-            var Tag = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s8 m12 l12 detail-info']/ul/li")[1].ChildNodes;
-            var Status = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s8 m12 l12 detail-info']/ul/li")[3].LastChild.InnerText;
-            var View = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s8 m12 l12 detail-info']/ul/li")[4].ChildNodes["b"].InnerText;
-            var TagName = new List<dynamic>();
-            foreach (var item in Tag)
+            try
             {
-                if(item.Name == "a")
+                HtmlDocument htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(this.GetHTML(Url));
+                var Title = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col m8 l8 w3-container w3-center detail-right']/h1/a").FirstOrDefault().InnerText;
+                var Image = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s4 m12 l12 detail-thumbnail']/img").FirstOrDefault().Attributes["src"].Value;
+                var Author = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s8 m12 l12 detail-info']/ul/li/h2/a").FirstOrDefault().InnerText;
+                var Decription = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-justify summary']").FirstOrDefault().FirstChild.InnerHtml;
+                var Tag = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s8 m12 l12 detail-info']/ul/li")[1].ChildNodes;
+                var Status = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s8 m12 l12 detail-info']/ul/li")[3].LastChild.InnerText;
+                var View = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s8 m12 l12 detail-info']/ul/li")[4].ChildNodes["b"].InnerText;
+                var TagName = new List<dynamic>();
+                foreach (var item in Tag)
                 {
-                    TagName.Add(item.InnerText);
+                    if (item.Name == "a")
+                    {
+                        TagName.Add(item.InnerText);
+                    }
                 }
+                return new
+                {
+                    Title = Title,
+                    Image = Image,
+                    Author = Author,
+                    Decription = Decription,
+                    Tag = TagName,
+                    Status = Status,
+                    View = View,
+                    Link = Url
+                };
             }
-            return new
+            catch (Exception ex)
             {
-                Title = Title,
-                Image = Image,
-                Author = Author,
-                Decription = Decription,
-                Tag = TagName,
-                Status = Status,
-                View = View,
-                Link = Url
-            };
+                this.ConsoleWrite(ex.Message, ConsoleColor.Red);
+                return this.GetInfo(Url);
+            }
+            
         }
         private List<dynamic> getLinkTruyen(string url)
         {
-            HtmlDocument htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(this.GetHTML(url));
-            var data = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s2 m2 l2 row-image']/div/a");
-            if (data == null)
-                return new List<dynamic>();
-            var lst = new List<dynamic>();
-            foreach (var item in data)
+            try
             {
-                var info = this.GetInfo(item.Attributes["href"].Value);
-                if (this.GetStory(new Story {
-                    Name = info.Title
-                })){
-                    lst.Add(info);
+                HtmlDocument htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(this.GetHTML(url));
+                var data = htmlDocument.DocumentNode.SelectNodes("//div[@class='w3-col s2 m2 l2 row-image']/div/a");
+                if (data == null)
+                    return new List<dynamic>();
+                var lst = new List<dynamic>();
+                foreach (var item in data)
+                {
+                    var info = this.GetInfo(item.Attributes["href"].Value);
+                    if (this.GetStory(new Story
+                    {
+                        Name = info.Title
+                    }))
+                    {
+                        lst.Add(info);
+                    }
                 }
+                return lst.Count > 0 ? lst : null;
             }
-            return lst.Count > 0 ? lst:null;
+            catch (Exception ex)
+            {
+                this.ConsoleWrite("GetLinkTruyen: "+ex.Message, ConsoleColor.Red);
+                return this.getLinkTruyen(url);
+            }
+            
         }
         private long GetLastPage(string url)
         {
-            HtmlDocument htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(this.GetHTML(url));
-            var data = htmlDocument.DocumentNode.SelectNodes("//a[@class='last']");
-            if (data == null)
-                return -1;
-            return long.Parse(data.FirstOrDefault().Attributes["title"].Value.Split('-').LastOrDefault());
-        }
-        private string GetData(Story Story,string url)
-        {
-            HtmlDocument htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(this.GetHTML(url));
-            var data = htmlDocument.DocumentNode.SelectNodes("//div[@id='content']");
-            if (data != null)
+            try
             {
-                this.ConsoleWrite(" [Success]", ConsoleColor.Blue,false);
-                using(var cmd = new InsertContent())
-                {
-                    cmd.content = new ContentData
-                    {
-                        StoryId = Story.StoryId,
-                        Content = data.FirstOrDefault().InnerHtml
-                    };
-                    cmd.Execute();
-                }
-                return data.FirstOrDefault().InnerHtml;
+                HtmlDocument htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(this.GetHTML(url));
+                var data = htmlDocument.DocumentNode.SelectNodes("//a[@class='last']");
+                if (data == null)
+                    return -1;
+                return long.Parse(data.FirstOrDefault().Attributes["title"].Value.Split('-').LastOrDefault());
             }
-            this.ConsoleWrite(" [Failed]", ConsoleColor.Red);
-            return "";
+            catch (Exception ex)
+            {
+                this.ConsoleWrite("GetLastPage: " + ex.Message, ConsoleColor.Red);
+                return this.GetLastPage(url);
+            }
+            
+        }
+        private string GetData(Story Story,string url, long? ChapterId)
+        {
+            try
+            {
+                HtmlDocument htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(this.GetHTML(url));
+                var data = htmlDocument.DocumentNode.SelectNodes("//div[@id='content']");
+                if (data != null)
+                {
+                    this.ConsoleWrite(" [Success]", ConsoleColor.Blue, false);
+                    using (var cmd = new InsertContent())
+                    {
+                        cmd.content = new ContentData
+                        {
+                            ChapterId = ChapterId,
+                            StoryId = Story.StoryId,
+                            Text = data.FirstOrDefault().InnerHtml
+                        };
+                        cmd.Execute();
+                    }
+                    return data.FirstOrDefault().InnerHtml;
+                }
+                this.ConsoleWrite(" [Failed]", ConsoleColor.Red);
+                return "";
+            }
+            catch (Exception ex)
+            {
+                this.ConsoleWrite("GetData: " + ex.Message, ConsoleColor.Red);
+                return this.GetData(Story, url, ChapterId);
+            }
+            
         }
         private List<dynamic> GetLinkChap(Story Story,string Url)
         {
-            HtmlDocument htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(this.GetHTML(Url));
-            var data = htmlDocument.DocumentNode.SelectNodes("//div[@class='list-chapter']/ul/li/h4/a");
-            if (data == null) return new List<dynamic>();
-            var lst = new List<dynamic>();
-            foreach (var item in data)
+            try
             {
-                Console.Write("\t\t[{0}] {1}: {2}", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),Story.Name,item.Attributes["title"].Value);
-                using(var cmd = new InsertChapter())
+                HtmlDocument htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(this.GetHTML(Url));
+                var data = htmlDocument.DocumentNode.SelectNodes("//div[@class='list-chapter']/ul/li/h4/a");
+                if (data == null) return new List<dynamic>();
+                var lst = new List<dynamic>();
+                foreach (var item in data)
                 {
-                    cmd.Chapter = new Chapter
+                    Console.Write("\t\t[{0}] {1}: {2}", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), Story.Name, item.Attributes["title"].Value);
+                    using (var cmd = new InsertChapter())
                     {
-                        StoryId = Story.StoryId,
-                        EditDate = DateTime.Now,
-                        WriteDate = DateTime.Now,
-                        Name = item.Attributes["title"].Value
-                    };
-                    cmd.Execute();
-                    lst.Add(new
-                    {
-                        Title = item.Attributes["title"].Value,
-                        Link = item.Attributes["href"].Value,
-                        Data = this.GetData(Story,item.Attributes["href"].Value)
-                    });
+                        cmd.Chapter = new Chapter
+                        {
+                            StoryId = Story.StoryId,
+                            EditDate = DateTime.Now,
+                            WriteDate = DateTime.Now,
+                            Name = item.Attributes["title"].Value
+                        };
+                        cmd.Execute();
+                        lst.Add(new
+                        {
+                            Title = item.Attributes["title"].Value,
+                            Link = item.Attributes["href"].Value,
+                            Data = this.GetData(Story, item.Attributes["href"].Value, cmd.Chapter.ChapterId)
+                        });
+                    }
                 }
+                return lst;
             }
-            return lst;
+            catch (Exception ex)
+            {
+                this.ConsoleWrite("GetLinkChap: " + ex.Message, ConsoleColor.Red);
+                return this.GetLinkChap(Story, Url);
+            }
+            
         }
         private void ConsoleWrite(string text = "", ConsoleColor color = ConsoleColor.White,bool inLine = false)
         {
             Console.ForegroundColor = color;
+            if(color == ConsoleColor.Red)
+            {
+                using(var w = new StreamWriter("error.log", true))
+                {
+                    w.WriteLine(text);
+                }
+            }
             if (inLine)
             {
                 Console.Write(text);
@@ -281,22 +336,31 @@ namespace DataTruyenFull
         }
         private List<dynamic> GetTypeStory()
         {
-            var lst = new List<dynamic>();
-            HtmlDocument htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(this.GetHTML(this.url));
-            var data = htmlDocument.DocumentNode.SelectNodes("//a[@class='w3-col s6 m6 l6']");
-            this.ConsoleWrite("Danh sách thể loại:",ConsoleColor.Gray);
-
-            foreach (var type in data)
+            try
             {
-                this.ConsoleWrite(type.Attributes["title"].Value, ConsoleColor.DarkBlue);
-                lst.Add(new
+                var lst = new List<dynamic>();
+                HtmlDocument htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(this.GetHTML(this.url));
+                var data = htmlDocument.DocumentNode.SelectNodes("//a[@class='w3-col s6 m6 l6']");
+                this.ConsoleWrite("Danh sách thể loại:", ConsoleColor.Gray);
+
+                foreach (var type in data)
                 {
-                    Url = type.Attributes["href"].Value,
-                    Title = type.Attributes["title"].Value
-                });
+                    this.ConsoleWrite(type.Attributes["title"].Value, ConsoleColor.DarkBlue);
+                    lst.Add(new
+                    {
+                        Url = type.Attributes["href"].Value,
+                        Title = type.Attributes["title"].Value
+                    });
+                }
+                return lst;
             }
-            return lst;
+            catch (Exception ex)
+            {
+                this.ConsoleWrite("GetTypeStory: " + ex.Message, ConsoleColor.Red);
+                return this.GetTypeStory();
+            }
+            
         }
         protected override Result ExecuteCore()
         {

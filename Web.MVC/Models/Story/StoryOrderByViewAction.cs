@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Web.MVC.Models
 {
-    public class UserSearchAction : CommandBase<dynamic>
+    public class StoryOrderByViewAction : CommandBase<dynamic>
     {
         public long? CurrentPage { get; set; }
         public long? Total { get; set; }
@@ -21,7 +21,7 @@ namespace Web.MVC.Models
         }
         protected override Result<dynamic> ExecuteCore()
         {
-            var result = Success(Query.QuerySet<dynamic>("sp_User_Search", this));
+            var result = Success(Query.QuerySet<dynamic>("sp_Story_SearchOrderByView", this));
             
             return Success(new
             {

@@ -9,7 +9,7 @@ namespace Web.MVC.Models
 {
     public class TagGetByIdAction : CommandBase<dynamic>
     {
-        public long? TagId { get; set; }
+        public long? StoryId { get; set; }
         protected override Result<dynamic> ExecuteCore()
         {
             var result = Query.QuerySet<dynamic>("sp_Tag_GetById", this);

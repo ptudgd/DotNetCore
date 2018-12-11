@@ -9,11 +9,12 @@ namespace Web.MVC.Models
 {
     public class ContentGetByIdAction : CommandBase<dynamic>
     {
-        public long? ContentId { get; set; }
+        public long? StoryId { get; set; }
+        public long? ChapterId { get; set; }
         protected override Result<dynamic> ExecuteCore()
         {
             var result = Query.QuerySet<dynamic>("sp_Content_GetById", this);
-            return Success(result);
+            return Success(result.FirstOrDefault());
         }
     }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { NavMenu } from './NavMenu';
 import { SideBar } from './SideBar';
-import { StoryInfo } from './StoryInfo';
 
 export class Layout extends Component {
   displayName = Layout.name
@@ -9,7 +8,7 @@ export class Layout extends Component {
   render() {
       return (
           <div>
-            <NavMenu></NavMenu>
+              <NavMenu></NavMenu>
               <div className="w3-row container">
                   {this.props.children}
                   <SideBar></SideBar>

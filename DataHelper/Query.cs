@@ -39,7 +39,9 @@ namespace DataHelper
                         {
                             var val = Parameter.GetType().GetProperty(param.ParameterName.Replace("@", ""));
                             if (val != null)
+                            {
                                 param.Value = val.GetValue(Parameter) ?? DBNull.Value;
+                            }
                             else
                             {
                                 param.Value = DBNull.Value;
@@ -60,7 +62,10 @@ namespace DataHelper
                                 //Convert object to my type (T)
                                 result.Add(reader.ConvertToClass<T>());
                             }
-
+                        }
+                        reader.NextResult();
+                        while (reader.Read())
+                        {
 
                         }
                         foreach (var item in Parameter.GetType().GetProperties())

@@ -9,7 +9,7 @@ namespace Web.MVC.Models
 {
     public class ChapterGetByIdAction : CommandBase<dynamic>
     {
-        public long? ChapterId { get; set; }
+        public long? StoryId { get; set; }
         protected override Result<dynamic> ExecuteCore()
         {
             var result = Query.QuerySet<dynamic>("sp_Chapter_GetById", this);

@@ -14,7 +14,7 @@ namespace DataTruyenFull
         protected override Result<long> ExecuteCore()
         {
             Query.Execute("sp_Content_Insert", this.content);
-            return Success(this.content.ContentId.Value);
+            return Success(this.content.ChapterId.Value);
         }
     }
 }

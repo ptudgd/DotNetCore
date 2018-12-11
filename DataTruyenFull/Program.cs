@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,8 +23,10 @@ namespace DataTruyenFull
                 else
                 {
                     Console.WriteLine(result.Message);
+                    System.Diagnostics.Process.Start(Assembly.GetExecutingAssembly().Location);
                 }
                 Console.ReadLine();
+
             }
         }
     }

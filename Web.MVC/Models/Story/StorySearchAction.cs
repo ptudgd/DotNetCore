@@ -18,6 +18,7 @@ namespace Web.MVC.Models
         {
             this.CurrentPage = this.CurrentPage ?? 1;
             this.PageSize = this.PageSize ?? 30;
+            this.Total = 0;
         }
         protected override Result<dynamic> ExecuteCore()
         {
