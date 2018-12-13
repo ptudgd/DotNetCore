@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="Content.cs" />
     <Compile Include="Chapter.cs" />
     <Compile Include="Content.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
