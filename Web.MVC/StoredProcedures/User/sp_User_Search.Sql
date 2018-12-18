@@ -22,7 +22,7 @@ Begin
 	BEGIN
 		SET @QuickSearch = '%' + @QuickSearch+'%'
 		SET @where = @where + 'AND (';
-		SET @where = @where + '[Story].Name like @QuickSearch'
+		SET @where = @where + '[User].Name like @QuickSearch'
 		SET @where = @where + ')'
 	END
 
@@ -30,9 +30,9 @@ Begin
 	
 	DECLARE @selectSQL NVARCHAR(MAX)
 	SET @selectSQL = N'
-		SELECT * FROM Story
+		SELECT * FROM User
 	'
-	+ @where + '  ORDER BY [Story].StoryId desc OFFSET @CurrentPage ROWS FETCH NEXT @PageSize ROWS ONLY '
+	+ @where + '  ORDER BY [User].UserId desc OFFSET @CurrentPage ROWS FETCH NEXT @PageSize ROWS ONLY '
 
 	EXECUTE sp_executesql
 	@selectSQL,
@@ -45,7 +45,7 @@ Begin
 	@CurrentPage, @PageSize,@QuickSearch
 
 	declare @countSQL nvarchar(500)
-	set @countSQL = N'SELECT @Total = COUNT(*) FROM [Story] with(NoLock, ReadUncommitted)' + @where
+	set @countSQL = N'SELECT @Total = COUNT(*) FROM [User] with(NoLock, ReadUncommitted)' + @where
 
 	execute sp_executesql
 	@countSQL,

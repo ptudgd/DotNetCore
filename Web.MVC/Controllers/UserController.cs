@@ -7,7 +7,7 @@ namespace Web.MVC.Controllers
 {
     public class UserController : Controller
     {
-        public Result<dynamic> Search(StorySearchAction ActionCmd)
+        public Result<dynamic> Search(UserSearchAction ActionCmd)
         {
             var result = ActionCmd.Execute();
             return result;
