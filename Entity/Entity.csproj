@@ -51,9 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
-    <Compile Include="Content.cs" />
     <Compile Include="Chapter.cs" />
     <Compile Include="Content.cs" />
+    <Compile Include="CT.cs" />
+    <Compile Include="Model1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="Story.cs" />
@@ -62,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
