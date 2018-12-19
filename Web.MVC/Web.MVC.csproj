@@ -15,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,20 @@
     <Folder Include="ClientApp\public\img\" />
     <Folder Include="ClientApp\public\styles\truyen\css\fonts\" />
     <Folder Include="ClientApp\public\styles\truyen\css\github.com\necolas\" />
+    <Folder Include="wwwroot\Content\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Content\bootstrap.min.js" />
+    <None Include="wwwroot\Content\css.css" />
+    <None Include="wwwroot\Content\font-awesome.css" />
+    <None Include="wwwroot\Content\heightLine.js" />
+    <None Include="wwwroot\Content\img_logo.png" />
+    <None Include="wwwroot\Content\jquery-1.11.0.min.js" />
+    <None Include="wwwroot\Content\jquery.cookie.js" />
+    <None Include="wwwroot\Content\main.js" />
+    <None Include="wwwroot\Content\stylesheet.css" />
+    <None Include="wwwroot\Content\xenforo.js" />
   </ItemGroup>
 
 </Project>

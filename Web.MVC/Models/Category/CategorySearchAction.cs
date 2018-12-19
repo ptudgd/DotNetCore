@@ -14,6 +14,10 @@ namespace Web.MVC.Models
         public long? PageSize { get; set; }
 
         public string QuickSearch { get; set; }
+        public CategorySearchAction()
+        {
+
+        }
         protected override void OnExecutingCore()
         {
             this.CurrentPage = this.CurrentPage ?? 1;
@@ -23,13 +27,7 @@ namespace Web.MVC.Models
         {
             var result = Query.QuerySet<dynamic>("sp_Category_Search", this);
             
-            return Success(new
-            {
-                Data = result,
-                Total = this.Total,
-                ItemPerPage = this.PageSize,
-                TotalPage = Math.Ceiling(Convert.ToDecimal(this.Total) / Convert.ToDecimal(this.PageSize))
-            });
+            return Success(result);
         }
     }
 }

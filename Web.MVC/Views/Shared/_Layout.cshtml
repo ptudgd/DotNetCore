@@ -1,74 +1,354 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@{ 
+    var cmd = new CategorySearchAction();
+    var Menu = cmd.Execute().Data;
+}
+<!DOCTYPE html>
+<html id="XenForo" lang="en-US" dir="LTR" class="Public NoJs LoggedOut NoSidebar  Responsive" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Web.MVC</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/" />
+    <title>Đọc Truyện Online Hay Và Mới Nhất | Web Truyện Online</title>
+    <meta name="keywords" content="web truyện online, đọc truyện online, truyện hay, đọc truyện" />
+    <link rel="alternate" hreflang="vi" href="http://webtruyenonline.com/" />
+    
+    <link rel="stylesheet" href="Content/css.css" />
+    <style>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+        /* --- truyen.css --- */
+
+        .pageWidth{
+	        width:100%; !important;
+	        margin-left: 0 !important;
+	        padding-left: 0 !important;
+	        padding-right: 0 !important;
+        }
+        .pageContent{
+	        width:100%; !important;
+	        margin-left: 0 !important;
+	        padding: 0 !important;
+        }
+    </style>
+    
+    <script src="/Content/jquery-1.11.0.min.js"></script>
+    <script src="/Content/xenforo.js?_v=5e82520a"></script>
+    <link rel="shortcut icon" href="http://webtruyenonline.com/styles/default/xenforo/favicon.png" />
+    <link rel="apple-touch-icon" href="http://webtruyenonline.com/styles/default/xenforo/logo.og.png" />
+    <link rel="alternate" type="application/rss+xml" title="RSS feed for Đọc Truyện Online Hay Và Mới Nhất | Web Truyện Online" href="forums/-/index.rss" />
+    <link href="Content/stylesheet.css" rel="stylesheet">
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Đọc Truyện Online Hay Và Mới Nhất" />
+    <meta property="og:description" content="Trang đọc truyện online hay và mới nhất cập nhật liên tục từ nhiều nguồn khác nhau trên mạng.Đặc biệt có phiên bản đọc truyện cho di động." />
+    <meta property="og:site_name" content="Đọc Truyện Online Hay Và Mới Nhất" />
+    <meta name="description" content="Trang đọc truyện online hay và mới nhất cập nhật liên tục từ nhiều nguồn khác nhau trên mạng.Đặc biệt có phiên bản đọc truyện cho di động." />
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Web.MVC</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
+    <div id="headerMover">
+        <div id="content" class="truyen_index">
+            <div class="pageWidth">
+                <div class="pageContent">
+                    <div class="header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="logo">
+                                        <a href="/">
+                                        <img src="Content/img_logo.png" alt="WebTruyen Online - Đọc Truyện Online Hay Và Mới Nhất"></a>
+                                        <h1 class="hidden">WebTruyen Online - Đọc Truyện Online Hay Và Mới Nhất</h1>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <form method="get" action="tim-truyen/">
+                                        <div class="input-group mt-15">
+                                            <input type="text" name="keyword" class="form-control" placeholder="Tìm truyện..." />
+                                            <span class="input-group-btn">
+                                                <input class="btn btn-default" type="submit" value="Go!" />
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-3 truyen-user">
+                                    <a href="login/" class="item control btn btn-default mt-15 mb-15">Đăng Nhập/Đăng ký</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="navbar navbar-inverse ">
+                        <div class="container">
+                            <div class="row">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <div id="navbar" class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><a href="#">TRANG CHỦ</a></li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">THỂ LOẠI<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                @{
+                                                    foreach (var item in Menu)
+                                                    {
+                                                        <li><a href="/Category?ActionCmd.CategoryId=@item.CategoryId">@item.Name</a></li>
+                                                    }
+                                                }
+
+                                            </ul>
+                                        </li>
+                                        <li><a href="the-loai/truyen-tranh.58/">TRUYỆN TRANH</a></li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CHỦ ĐỀ<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="truyen-moi/">Truyện Mới</a></li>
+                                                <li><a href="truyen-hot/">Xem Nhiều</a></li>
+                                                <li><a href="truyen-moi-cap-nhat/">Mới Cập Nhật</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="yeu-cau/">YÊU CẦU TRUYỆN</a></li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TIỆN ÍCH<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="bo-suu-tap">BỘ SƯU TẬP</a></li>
+                                                <li><a href="truyen/tong-tai-toi-chang-the-yeu.16297/chuong-2">Đến truyện đang đọc</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="forums">DIỄN ĐÀN</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    @RenderBody()
+                    <footer>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <p>WebTruyenOnline - <a href="http://webtruyenonline.com/">Đọc truyện online</a><a href="http://webtruyenonline.com/">Đọc truyện chữ</a><a href="http://webtruyenonline.com/">truyện hay</a>. Website luôn cập nhật những bộ truyện mới thuộc các thể loại đặc sắc như truyện <a href="http://webtruyenonline.com/">tiên hiệp</a><a href="http://webtruyenonline.com/">kiếm hiệp</a>hay <a href="http://webtruyenonline.com/">ngôn tình</a> một cách nhanh nhất. Hỗ trợ mọi thiết bị như di động và máy tính bảng</p>
+                                    <p>
+                                        <a href="http://pikvector.com" target="_blank">Free Vector Stock</a> | <a href="http://pikvector.com" target="_blank">Graphic Resource</a>TNS Movie - <a href="http://tamnhinso.info/phim">Xem Phim Online</a>
+                                        <a href="https://hantran.info/" target="_blank">Programming Tips</a><a href="http://uikitvn.com/" target="_blank">UI Kit</a><a href="http://uikitvn.com/" target="_blank">Sketch Việt Nam</a>
+                                        <a href="http://serumthaoduoc.vn/" target="_blank">Serum Thảo Dược</a>
+                                        <a href="http://myphamzozomoon.vn/my-pham/serum" target="_blank">Serum Thảo Dược Zozomoon</a>
+                                    </p>
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="fl-right pt-10">© 2015 WebTruyenOnline.com<br><a href="http://www.dmca.com/Protection/Status.aspx?ID=351c7794-bc2c-4934-8484-0bbe2b291573" title="DMCA.com Protection Status" class="dmca-badge"> <img src="//images.dmca.com/Badges/dmca-badge-w100-5x1-07.png?ID=351c7794-bc2c-4934-8484-0bbe2b291573" alt="DMCA.com Protection Status"></a>
+                                    <script src="//images.dmca.com/Badges/DMCABadgeHelper.min.js"></script></p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                    <script src="/Content/bootstrap.min.js"></script>
+                    <script src="/Content/heightLine.js"></script>
+                    <script src="/Content/jquery.cookie.js"></script>
+                    <script src="/Content/main.js"></script>
+                    
+                    <form action="login/login" method="post" class="xenForm " id="login" style="display:none">
+                        <div class="ctrlWrapper">
+                            <dl class="ctrlUnit">
+                                <dt><label for="LoginControl">Your name or email address:</label></dt>
+                                <dd><input type="text" name="login" id="LoginControl" class="textCtrl" tabindex="101" /></dd>
+                            </dl>
+                            <dl class="ctrlUnit">
+                                <dt>
+                                    <label for="ctrl_password">Do you already have an account?</label>
+                                </dt>
+                                <dd>
+                                    <ul>
+                                        <li>
+                                            <label for="ctrl_not_registered">
+                                                <input type="radio" name="register" value="1" id="ctrl_not_registered" tabindex="105" />
+                                                No, create an account now.
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="ctrl_registered">
+                                                <input type="radio" name="register" value="0" id="ctrl_registered" tabindex="105" checked="checked" class="Disabler" />
+                                                Yes, my password is:
+                                            </label>
+                                        </li>
+                                        <li id="ctrl_registered_Disabler">
+                                            <input type="password" name="password" class="textCtrl" id="ctrl_password" tabindex="102" />
+                                            <div class="lostPassword"><a href="lost-password/" class="OverlayTrigger OverlayCloser" tabindex="106">Forgot your password?</a></div>
+                                        </li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                            <dl class="ctrlUnit submitUnit">
+                                <dt></dt>
+                                <dd>
+                                    <input type="submit" class="button primary" value="Log in" tabindex="104" data-loginPhrase="Log in" data-signupPhrase="Sign up" />
+                                    <label for="ctrl_remember" class="rememberPassword" style="display:none !important;"><input type="checkbox" checked name="remember" value="1" id="ctrl_remember" tabindex="103" /> Stay logged in</label>
+                                </dd>
+                            </dl>
+                        </div>
+                        <input type="hidden" name="cookie_check" value="1" />
+                        <input type="hidden" name="redirect" value="/" />
+                        <input type="hidden" name="_xfToken" value="" />
+                    </form>
+                </div>
             </div>
         </div>
-    </nav>
-
-    <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - Web.MVC</p>
-        </footer>
+        <header></header>
     </div>
+    <footer></footer>
+    <script>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
 
-    @RenderSection("Scripts", required: false)
+        jQuery.extend(true, XenForo,
+            {
+                visitor: { user_id: 0 },
+                serverTimeInfo:
+                {
+                    now: 1545206564,
+                    today: 1545152400,
+                    todayDow: 3
+                },
+                _lightBoxUniversal: "0",
+                _enableOverlays: "1",
+                _animationSpeedMultiplier: "1",
+                _overlayConfig:
+                {
+                    top: "10%",
+                    speed: 200,
+                    closeSpeed: 100,
+                    mask:
+                    {
+                        color: "rgb(255, 255, 255)",
+                        opacity: "0.6",
+                        loadSpeed: 200,
+                        closeSpeed: 100
+                    }
+                },
+                _ignoredUsers: [],
+                _loadedScripts: { "truyen": true },
+                _cookieConfig: { path: "/", domain: "", prefix: "xf_" },
+                _csrfToken: "",
+                _csrfRefreshUrl: "login/csrf-token-refresh",
+                _jsVersion: "5e82520a"
+            });
+        jQuery.extend(XenForo.phrases,
+            {
+                cancel: "Cancel",
+
+                a_moment_ago: "A moment ago",
+                one_minute_ago: "1 minute ago",
+                x_minutes_ago: "%minutes% minutes ago",
+                today_at_x: "Today at %time%",
+                yesterday_at_x: "Yesterday at %time%",
+                day_x_at_time_y: "%day% at %time%",
+
+                day0: "Sunday",
+                day1: "Monday",
+                day2: "Tuesday",
+                day3: "Wednesday",
+                day4: "Thursday",
+                day5: "Friday",
+                day6: "Saturday",
+
+                _months: "January,February,March,April,May,June,July,August,September,October,November,December",
+                _daysShort: "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
+
+                following_error_occurred: "The following error occurred",
+                server_did_not_respond_in_time_try_again: "The server did not respond in time. Please try again.",
+                logging_in: "Logging in",
+                click_image_show_full_size_version: "Click this image to show the full-size version.",
+                show_hidden_content_by_x: "Show hidden content by {names}"
+            });
+
+        // Facebook Javascript SDK
+        XenForo.Facebook.appId = "";
+        XenForo.Facebook.forceInit = false;
+
+
+    </script>
+    
+    <style>
+        .float-ck {
+            position: fixed;
+            bottom: 0px;
+            z-index: 9000
+        }
+
+        * html .float-ck {
+            position: absolute;
+            bottom: auto;
+            top: expression(eval (document.documentElement.scrollTop+document.docum entElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+        }
+
+        #float_content_left {
+            background: #FFF;
+            border: 1px solid #01AEF0;
+        }
+
+        #hide_float_left {
+            text-align: right;
+            font-size: 11px;
+            position: absolute;
+            top: 5px;
+            right: 0px;
+        }
+
+            #hide_float_left a {
+                background: #01AEF0;
+                padding: 5px 5px 5px 5px;
+                color: #FFF !important;
+            }
+
+
+        #float_content_right {
+            border: 1px solid #01AEF0;
+        }
+
+        #hide_float_right {
+            text-align: left;
+            font-size: 11px;
+        }
+
+            #hide_float_right a {
+                background: #01AEF0;
+                padding: 5px 5px 5px 5px;
+                color: #FFF;
+            }
+    </style>
+    <script type="text/javascript">
+
+        function hide_float_left() {
+            var content = document.getElementById('float_content_left');
+            var hide = document.getElementById('hide_float_left');
+            if (content.style.display == "none") { content.style.display = "block"; hide.innerHTML = '<a href="javascript:hide_float_left()">Ẩn Quảng Cáo [x]</a>'; }
+            else {
+                content.style.display = "none"; hide.innerHTML = "";
+            }
+        }
+        if ($.getCookie('show_float_banner') == null) {
+            //var adsTimer = window.setInterval(showHideAdsButton, 5000);
+        }
+        var adsTimer = window.setInterval(showHideAdsButton, 5000);
+        function showHideAdsButton() {
+            clearInterval(adsTimer);
+            return;
+            if ($.getCookie('show_float_banner') == null) {
+                $("#float_content_left").show();
+                var expires = 5; // minutes
+                expires = new Date(new Date().getTime() + expires * 60000); // milliseconds in a day
+                $.setCookie("show_float_banner", 1, expires);
+            }
+        }
+    </script>
+    <div class="float-ck" style="right: 0px">
+        <div id="float_content_left" style="display:none;">
+            <div id="hide_float_left">
+                <a href="javascript:hide_float_left()">Ẩn Quảng Cáo[X]</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
