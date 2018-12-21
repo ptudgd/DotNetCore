@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using Entity;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Web.MVC.Models;
@@ -30,7 +32,12 @@ namespace Web.MVC.Controllers
         }
         public IActionResult GetById(StoryGetByIdAction ActionCmd)
         {
-            this.ViewBag.Result = ActionCmd.Execute().Data;
+            var result =  ActionCmd.Execute().Data;
+            this.ViewBag.Result = new Story();
+            if(result != null)
+            {
+                this.ViewBag.Result = result;
+            }
             return View();
         }
 

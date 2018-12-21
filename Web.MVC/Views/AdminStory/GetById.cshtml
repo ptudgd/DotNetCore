@@ -26,12 +26,12 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-            <button type="button" onclick="Save();" class="btn btn-primary">Lưu</button>
+            <button type="button" onclick="Save(@this.ViewBag.Result.StoryId);" class="btn btn-primary">Lưu</button>
         </div>
     </div>
 </div>
 <script>
-    function Save() {
+    function Save(id) {
         var Name = $("#Name").val();
         var Image = $("#Image").val();
         $.post(
@@ -39,7 +39,7 @@
             {
                 ActionCmd: {
                     Story: {
-                        StoryId: @this.ViewBag.Result.StoryId || null,
+                        StoryId:id ,
                         Name: Name,
                         Image: Image
                     }

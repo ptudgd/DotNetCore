@@ -57,9 +57,30 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Debug.zip" />
+    <None Include="GetData\DataTruyenFull.application" />
+    <None Include="GetData\DataTruyenFull.exe.config" />
+    <None Include="GetData\DataTruyenFull.exe.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GetData\app.publish\DataTruyenFull.exe" />
+    <Content Include="GetData\DataHelper.dll" />
+    <Content Include="GetData\DataHelper.pdb" />
+    <Content Include="GetData\DataTruyenFull.exe" />
+    <Content Include="GetData\DataTruyenFull.pdb" />
+    <Content Include="GetData\EntityFramework.dll" />
+    <Content Include="GetData\EntityFramework.SqlServer.dll" />
+    <Content Include="GetData\EntityFramework.SqlServer.xml" />
+    <Content Include="GetData\EntityFramework.xml" />
+    <Content Include="GetData\HtmlAgilityPack.dll" />
+    <Content Include="GetData\HtmlAgilityPack.pdb" />
+    <Content Include="GetData\HtmlAgilityPack.xml" />
+    <Content Include="GetData\JWT.dll" />
+    <Content Include="GetData\JWT.xml" />
+    <Content Include="GetData\Newtonsoft.Json.dll" />
+    <Content Include="GetData\Newtonsoft.Json.xml" />
+    <Content Include="GetData\xNet.dll" />
     <Content Include="MySolution.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
