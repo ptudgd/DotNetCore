@@ -129,16 +129,24 @@ namespace DataHelper
                         cmd.ExecuteNonQuery();
                         foreach (var item in Parameter.GetType().GetProperties())
                         {
-                            var propertyType = item.PropertyType;
-                            if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                            try
                             {
-                                propertyType = propertyType.GetGenericArguments()[0];
+                                var propertyType = item.PropertyType;
+                                if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                                {
+                                    propertyType = propertyType.GetGenericArguments()[0];
+                                }
+                                var data = cmd.Parameters["@" + item.Name].Value;
+                                if (data != DBNull.Value)
+                                {
+                                    item.SetValue(Parameter, Convert.ChangeType(data, propertyType), null);
+                                }
                             }
-                            var data = cmd.Parameters["@" + item.Name].Value;
-                            if(data != DBNull.Value)
+                            catch (Exception e)
                             {
-                                item.SetValue(Parameter, Convert.ChangeType(data, propertyType), null);
+
                             }
+                            
                         }
                         conn.Close();
                     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataHelper;
 using Entity;
 using Infrastructure;
@@ -13,22 +14,27 @@ namespace Web.MVC.Controllers
     {
         public bool Login(string Email,string Password)
         {
-            using(var cmd = new UserGetByIdAction<User>())
+            using(var cmd = new UserSearchAction<User>())
             {
                 cmd.Email = Email;
-                cmd.Password = MD5.CreateMD5(Password);
                 var result = cmd.Execute().Data;
-                if(result != null)
+                if(result.Count > 0)
                 {
-                    result.LastLogin = DateTime.Now.Ticks;
-                    result.Token = JWT.JWT_Encode(result);
-                    using(var u = new UserUpdateAction())
+                    var data = result.FirstOrDefault(x => x.Password == MD5.CreateMD5(Password));
+                    if(data != null)
                     {
-                        u.user = result;
-                        u.Execute();
+                        data.LastLogin = DateTime.Now.Ticks;
+                        data.Token = JWT.JWT_Encode(data);
+                        using (var u = new UserUpdateAction())
+                        {
+                            u.user = data;
+                            u.Execute();
+                        }
+                        HttpContext.Session.SetString("Token", data.Token);
+                        return true;
                     }
-                    HttpContext.Session.SetString("Token", result.Token);
-                    return true;
+                    return false;
+                    
                 }
                 else
                 {

@@ -10,26 +10,12 @@ IF object_id('sp_User_Update') IS NULL
 GO
 ALTER proc [dbo].sp_User_Update
 @UserId bigint,
-@Email nvarchar(max),
 @Name nvarchar(max),
-@Password nvarchar(max),
-@Image nvarchar(max),
-@FacebookId nvarchar(max),
-@LastLogin bigint,
-@Exp bigint,
-@Token nvarchar(max),
-@Money decimal(18,2)
+@Password nvarchar(max)
 as
 begin
 UPDATE [dbo].[User]
-   SET [Email] = @Email
-      ,[Image] = @Image
-      ,[FacebookId] = @FacebookId
-      ,[LastLogin] = @LastLogin
-      ,[Exp] = @Exp
-      ,[Token] = @Token
-      ,[Money] = @Money
-	  ,[Name] = @Name
+   SET [Name] = @Name
 	  ,[Password] = @Password
  WHERE [User].UserId = @UserId
 

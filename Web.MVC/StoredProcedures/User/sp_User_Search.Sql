@@ -4,6 +4,10 @@ IF object_id('sp_User_Search') IS NULL
 GO
 ALTER PROCEDURE [dbo].sp_User_Search
 (
+@Total int out,
+@PageSize bigint,
+@CurrentPage bigint,
+@Email nvarchar(max),
 @QuickSearch nvarchar(500)
 )
 As
@@ -17,6 +21,10 @@ Begin
 	DECLARE @where NVARCHAR(MAX);
 	set @where = ' WHERE 1=1 ';
 	
+	IF(@Email IS NOT NULL)
+	BEGIN
+		SET @where = @where + ' AND [User].Email = @Email '
+	END
 	
 	if(@QuickSearch is not null)
 	BEGIN
@@ -30,7 +38,7 @@ Begin
 	
 	DECLARE @selectSQL NVARCHAR(MAX)
 	SET @selectSQL = N'
-		SELECT * FROM User
+		SELECT * FROM [User]
 	'
 	+ @where + '  ORDER BY [User].UserId desc OFFSET @CurrentPage ROWS FETCH NEXT @PageSize ROWS ONLY '
 
@@ -39,10 +47,10 @@ Begin
 	N'
 	  @CurrentPage INT,
 	  @PageSize int  = 20,
-	  
+	  @Email nvarchar(max),
 	  @QuickSearch nvarchar(500)',
 	
-	@CurrentPage, @PageSize,@QuickSearch
+	@CurrentPage, @PageSize,@Email,@QuickSearch
 
 	declare @countSQL nvarchar(500)
 	set @countSQL = N'SELECT @Total = COUNT(*) FROM [User] with(NoLock, ReadUncommitted)' + @where
@@ -50,9 +58,9 @@ Begin
 	execute sp_executesql
 	@countSQL,
 	N'@Total INT OUT,
-	
+	@Email nvarchar(max),
 	@QuickSearch nvarchar(500)',
-	@Total OUT,@QuickSearch
+	@Total OUT,@Email,@QuickSearch
 
 	---------------------------------------------------
 	SET NOCOUNT OFF;

@@ -1,12 +1,13 @@
 ﻿
 @{
     ViewData["Title"] = "GetById";
-    Layout = null;
+    Layout =null;
 }
+
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">@this.ViewBag.Result.Name</h5>
+            <h5 class="modal-title" id="exampleModalLabel">@this.ViewBag.Result.Email</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -14,39 +15,45 @@
         <div class="modal-body">
             <form method="post">
                 <div>
+                    <label>Email</label>
+                    <input type="email" id="Email" class="form-control" value="@this.ViewBag.Result.Email" />
+                </div>
+                <div>
                     <label>Tên</label>
                     <input type="text" id="Name" class="form-control" value="@this.ViewBag.Result.Name" />
                 </div>
                 <div>
-                    <label>Hình ảnh</label>
-                    <input type="text" id="Image" class="form-control" value="@this.ViewBag.Result.Image" />
+                    <label>Mật khẩu</label>
+                    <input type="password" id="Password" value="@this.ViewBag.Result.Password" class="form-control" placeholder="Bỏ trống nếu không cập nhật" />
                 </div>
 
             </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-            <button type="button" onclick="Save();" class="btn btn-primary">Lưu</button>
+            <button type="button" onclick="Save(@this.ViewBag.Result.UserId);" class="btn btn-primary">Lưu</button>
         </div>
     </div>
 </div>
 <script>
-    function Save() {
+    function Save(UserId) {
         var Name = $("#Name").val();
-        var Image = $("#Image").val();
+        var Password = $("#Password").val();
+        var Email = $("#Email").val();
         $.post(
-            '/AdminStory/StoryExecuteSave',
+            '/AdminUser/ExecuteSave',
             {
                 ActionCmd: {
-                    Story: {
-                        StoryId: @this.ViewBag.Result.StoryId || null,
+                    User: {
                         Name: Name,
-                        Image: Image
+                        Password: Password,
+                        UserId: UserId,
+                        Email : Email
                     }
                 }
             }, function (result) {
                 alert(result.message);
             }
-        )
+        );
     }
 </script>

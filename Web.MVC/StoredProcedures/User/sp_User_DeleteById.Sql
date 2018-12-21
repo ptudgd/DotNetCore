@@ -10,7 +10,7 @@ begin
 	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 	---------------------------------------------------
 
-	DELETE  FROM User WHERE [User].UserId = @UserId
+	DELETE  FROM [User] WHERE [User].UserId = @UserId
 
 	---------------------------------------------------
 	SET NOCOUNT OFF;

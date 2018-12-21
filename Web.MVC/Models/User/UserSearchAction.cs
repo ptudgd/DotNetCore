@@ -7,31 +7,24 @@ using System.Threading.Tasks;
 
 namespace Web.MVC.Models
 {
-    public class UserSearchAction : CommandBase<dynamic>
+    public class UserSearchAction<T> : CommandBase<List<T>> where T:class,new()
     {
         public long? CurrentPage { get; set; }
         public long? Total { get; set; }
         public long? PageSize { get; set; }
 
+        public string Email { get; set; }
         public string QuickSearch { get; set; }
         protected override void OnExecutingCore()
         {
             this.CurrentPage = this.CurrentPage ?? 1;
             this.PageSize = this.PageSize ?? 30;
         }
-        protected override Result<dynamic> ExecuteCore()
+        protected override Result<List<T>> ExecuteCore()
         {
-            var result = Success(Query.QuerySet<dynamic>("sp_User_Search", this));
+            var result = Success(Query.QuerySet<T>("sp_User_Search", this));
             
-            return Success(new
-            {
-                IsSuccess = result.IsSuccess,
-                Data = result.Data,
-                Message = result.Message,
-                Total = this.Total,
-                ItemPerPage = this.PageSize,
-                TotalPage = Math.Ceiling(Convert.ToDecimal(this.Total) / Convert.ToDecimal(this.PageSize))
-            });
+            return result;
         }
     }
 }

@@ -10,16 +10,15 @@ namespace Web.MVC.Models
 {
     public class UserGetByIdAction<T> : CommandBase<T> where T : class,new()
     {
-        public string  Email { get; set; }
-        public string  Password { get; set; }
+        public long? UserId { get; set; }
         protected override void OnExecutingCore()
         {
             base.OnExecutingCore();
         }
         protected override Result<T> ExecuteCore()
         {
-            var result = Query.QuerySet<T>("sp_User_GetById", this).FirstOrDefault();
-            return Success(result);
+            var result = Query.QuerySet<T>("sp_User_GetById", this);
+            return Success(result.FirstOrDefault());
         }
     }
 }
