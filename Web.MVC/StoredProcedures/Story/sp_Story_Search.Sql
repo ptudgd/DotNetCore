@@ -34,11 +34,14 @@ Begin
 	
 	DECLARE @selectSQL NVARCHAR(MAX)
 	SET @selectSQL = N'
-		SELECT [Story].*,[Status].Name as StatusName FROM Story
+		SELECT [Story].*,[Status].Name as StatusName,[User].Name as AuthorName,(
+			SELECT COUNT(*) FROM Chapter WHERE Chapter.StoryId = Story.StoryId
+		) as TotalChapter FROM Story
 		LEFT JOIN [Status] on [Status].StatusId = [Story].StatusId
+		LEFT JOIN [User] on [User].UserId = Story.AuthorId
 	'
-	+ @where + '  ORDER BY [Story].WriteDate desc OFFSET @CurrentPage ROWS FETCH NEXT @PageSize ROWS ONLY '
-
+	+ @where + '  ORDER BY [Story].WriteDate,[Story].[View] desc OFFSET @CurrentPage ROWS FETCH NEXT @PageSize ROWS ONLY '
+	print @selectSQL;
 	EXECUTE sp_executesql
 	@selectSQL,
 	N'

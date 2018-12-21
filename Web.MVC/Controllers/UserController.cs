@@ -12,22 +12,6 @@ namespace Web.MVC.Controllers
             var result = ActionCmd.Execute();
             return result;
         }
-        public Result<dynamic> GetById(UserGetByIdAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-        public Result Insert(UserInsertAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-        public Result Update(UserUpdateAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-        public Result DeleteById(UserDeleteByIdAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
 
 
     }

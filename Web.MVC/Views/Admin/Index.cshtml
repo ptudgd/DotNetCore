@@ -54,10 +54,10 @@
                         <form role="form">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                    <input class="form-control" placeholder="E-mail" id="email" type="email" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Password" id="password" type="password" value="">
                                 </div>
                                 <div class="checkbox">
                                     <label>
@@ -65,7 +65,7 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="/AdminStory" class="btn btn-lg btn-success btn-block">Login</a>
+                                <a href="#" onclick="login(); return false;" class="btn btn-lg btn-success btn-block">Login</a>
                             </fieldset>
                         </form>
                     </div>
@@ -85,7 +85,26 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="~/admin/dist/js/sb-admin-2.js"></script>
-
+    <script>
+        function login() {
+            var Email = $("#email").val();
+            var Password = $("#password").val();
+            $.post(
+                "/Authorize/Login",
+                {
+                    Email: Email,
+                    Password: Password
+                }, function (result) {
+                    if (result == true) {
+                        window.location.href = "/AdminStory";
+                    }
+                    else {
+                        alert("Tài khoản hoặc mật khẩu không đúng!");
+                    }
+                }
+            )
+        }
+    </script>
 </body>
 
 </html>

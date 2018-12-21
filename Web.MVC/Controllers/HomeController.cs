@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entity;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Web.MVC.Models;
@@ -10,12 +11,16 @@ namespace Web.MVC.Controllers
     {
         public ActionResult Index()
         {
-            using(var cmd = new HomeListAction())
+            using(var cmd = new HomeListAction<dynamic>())
             {
-                this.ViewBag.Result = cmd.Execute().Data;
-                return View();
+                this.ViewBag.StoryNewUpdate = cmd.Execute().Data;
             }
+            using(var cmd = new HomeViewAction<dynamic>())
+            {
+                this.ViewBag.StoryView = cmd.Execute().Data;
+            }
+            return View();
         }
-        
+
     }
 }

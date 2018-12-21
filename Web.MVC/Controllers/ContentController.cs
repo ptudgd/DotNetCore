@@ -7,28 +7,12 @@ namespace Web.MVC.Controllers
 {
     public class ContentController : Controller
     {
-        public Result<dynamic> Search(ContentSearchAction ActionCmd)
+        public ActionResult Index(ContentGetByIdAction ActionCmd)
         {
-            var result = ActionCmd.Execute();
-            return result;
+            this.ViewBag.Result =  ActionCmd.Execute().Data;
+            return View();
         }
-        public Result<dynamic> GetById(ContentGetByIdAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-        public Result Insert(ContentInsertAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-        public Result Update(ContentUpdateAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-        public Result DeleteById(ContentDeleteByIdAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-
+        
 
     }
 }

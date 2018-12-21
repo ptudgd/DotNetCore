@@ -11,9 +11,10 @@ begin
 	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 	---------------------------------------------------
 	
-	SELECT Content.*,Story.Name as StoryName,Chapter.Name as ChapterName FROM Story 
+	SELECT Content.*,Story.Name as StoryName,Story.AuthorId,Story.StoryId,Chapter.ChapterId,Chapter.Name as ChapterName,[User].Name as AuthorName FROM Story 
 	LEFT JOIN Content on Content.StoryId = Story.StoryId
 	LEFT JOIN Chapter on Chapter.ChapterId = @ChapterId AND Chapter.StoryId = Story.StoryId
+	LEFT JOIN [User] on [User].UserId = Story.AuthorId
 	WHERE Story.StoryId = @StoryId
 
 	---------------------------------------------------

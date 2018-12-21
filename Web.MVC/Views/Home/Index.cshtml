@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 
@@ -9,7 +10,7 @@
     <div class="row">
         <div class="feature-block cf mt-30">
             <div class="col-md-4">
-                <a href="http://webtruyenonline.com/threads/thu-moi-cong-tac-vien-ctv.31/" target="_blank"><img src="/media/bnr/bnr_ctv.png" alt="Chia sẻ truyện cùng webtruyenonline" title="Chia sẻ truyện cùng webtruyenonline" /></a>
+                <a href="http://webtruyenonline.com/threads/thu-moi-cong-tac-vien-ctv.31/" target="_blank"><img src="~/images/bnr_ctv.png" alt="Chia sẻ truyện cùng webtruyenonline" title="Chia sẻ truyện cùng webtruyenonline" /></a>
                 <a href="http://myphamzozomoon.vn/my-pham-zozomoon" target="_blank"><img src="http://myphamzozomoon.vn/my-pham-zozomoon.jpg" class="mt-15" alt="Kem Trị Nám, Serum Trị Nám  tàn nhang dưỡng trắng da" title="Kem Trị Nám, Serum Trị Nám  tàn nhang dưỡng trắng da" /></a>
             </div>
             <div class="col-md-8">
@@ -28,28 +29,28 @@
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
                             <div style="position:relative">
-                                <img class="seventh-slide" src="/media/bnr/feature_thuongan.jpg" alt="Thượng Ẩn" title="Thượng Ẩn" />
+                                <img class="seventh-slide" src="~/images/feature_thuongan.jpg" alt="Thượng Ẩn" title="Thượng Ẩn" />
                                 <a href="/truyen/thuong-an.4421/" target="_blank" class="btn btn-default" style="position: absolute;top: 50%;right: 50px;width: 28%;">Đọc truyện</a>
                                 <a href="http://tamnhinso.info/phim/thuong-an-nghien.1115/" target="_blank" class="btn btn-default" style="    position: absolute;top: 61%;right: 50px;width: 28%;">Xem phim</a>
                             </div>
                         </div>
                         <div class="item">
-                            <a href="/truyen/sirens-lament.5063/" target="_blank"><img class="first-slide" src="/media/bnr/siren.png" alt="Siren's Lament" title="Siren's Lament" /></a>
+                            <a href="/truyen/sirens-lament.5063/" target="_blank"><img class="first-slide" src="~/images/siren.png" alt="Siren's Lament" title="Siren's Lament" /></a>
                         </div>
                         <div class="item">
-                            <a href="/the-loai/ngon-tinh.23/" target="_blank"><img class="second-slide" src="/media/bnr/feature_01.jpg" alt="Ngôn tình" title="Ngôn tình" /></a>
+                            <a href="/the-loai/ngon-tinh.23/" target="_blank"><img class="second-slide" src="~/images/feature_01.jpg" alt="Ngôn tình" title="Ngôn tình" /></a>
                         </div>
                         <div class="item">
-                            <a href="/the-loai/truyen-teen.46/" target="_blank"><img class="third-slide" src="/media/bnr/feature_truyenteen.jpg" alt="Truyện Teen" title="Truyện Teen" /></a>
+                            <a href="/the-loai/truyen-teen.46/" target="_blank"><img class="third-slide" src="~/images/feature_truyenteen.jpg" alt="Truyện Teen" title="Truyện Teen" /></a>
                         </div>
                         <div class="item">
-                            <a href="/the-loai/huyen-huyen.31/" target="_blank"><img class="fourth-slide" src="/media/bnr/feature_huyenhuyen.jpg" alt="Huyền huyễn" title="Huyền huyễn" /></a>
+                            <a href="/the-loai/huyen-huyen.31/" target="_blank"><img class="fourth-slide" src="~/images/feature_huyenhuyen.jpg" alt="Huyền huyễn" title="Huyền huyễn" /></a>
                         </div>
                         <div class="item">
-                            <a href="/the-loai/kiem-hiep.42/" target="_blank"><img class="fifth-slide" src="/media/bnr/feature_kiemhiep.jpg" alt="Kiếm hiệp" title="Kiếm hiệp" /></a>
+                            <a href="/the-loai/kiem-hiep.42/" target="_blank"><img class="fifth-slide" src="~/images/feature_kiemhiep.jpg" alt="Kiếm hiệp" title="Kiếm hiệp" /></a>
                         </div>
                         <div class="item">
-                            <a href="/the-loai/tien-hiep.50/" target="_blank"><img class="sixth-slide" src="/media/bnr/feature_tienhiep.jpg" alt="Tiên hiệp" title="Tiên hiệp" /></a>
+                            <a href="/the-loai/tien-hiep.50/" target="_blank"><img class="sixth-slide" src="~/images/feature_tienhiep.jpg" alt="Tiên hiệp" title="Tiên hiệp" /></a>
                         </div>
 
                     </div>
@@ -77,7 +78,7 @@
             </div>
         </div>
         <div class="cf">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <p class="h1-title"><a href="truyen-moi-cap-nhat/">Mới cập nhật</a></p>
                 <div class="new-update">
                     <table class="table table-bordered table-hover table-responsive">
@@ -85,448 +86,73 @@
                             <tr>
                                 <th>Truyện</th>
                                 <th>Thể loại</th>
-                                <th>Chương</th>
+                                <th class="text-center">Chương</th>
                                 <th>Cập nhật</th>
                             </tr>
                         </thead>
+                        @foreach (var item in this.ViewBag.StoryNewUpdate)
+                        {
+                            <tr>
+                                <td><a href="/Story?ActionCmd.StoryId=@item.StoryId" title="@item.Name">@item.Name</a></td>
+                                <td>
+                                    @{
+                                        var cmd = new TagGetByIdAction();
+                                        cmd.StoryId = item.StoryId;
+                                        var tag = cmd.Execute().Data;
+                                    }
+                                    @foreach (var items in tag)
+                                    {
+                                        <a href="/Category/@items.CategoryId">@items.Name</a>
+                                    }
 
-                        <tr>
-                            <td><a href="truyen/phuong-hoang-tai-sinh.18323/" title="Phượng Hoàng Tái Sinh">Phượng Hoàng Tái Sinh</a></td>
-                            <td>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>
-                                <a href="the-loai/nu-cuong.29/">Nữ Cường</a>
-                                <a href="the-loai/co-dai.30/">Cổ Đại</a>
-                                <a href="the-loai/huyen-huyen.31/">Huyền Huyễn</a>
-                                <a href="the-loai/xuyen-khong.32/">Xuyên Không</a>
-                                <a href="the-loai/do-thi.38/">Đô Thị</a>
-                                <a href="the-loai/di-nang.45/">Dị Năng</a>
-                                <a href="the-loai/trinh-tham.47/">Trinh Thám</a>
-                            </td>
-                            <td><a href="truyen/phuong-hoang-tai-sinh.18323/chuong-23">23</a></td>
-                            <td>16-12-2018</td>
-                        </tr>
-                        
+                                </td>
+                                <td class="text-center"><a href="@string.Format("/Story?ActionCmd.StoryId={0}&ActionCmd.ChapterId={1}",item.StoryId,item.TotalChapter)">@item.TotalChapter</a></td>
+                                <td>@item.EditDate</td>
+                            </tr>
+                        }
+
+
                     </table>
                 </div>
             </div>
-            <div class="col-md-4">
-                <p class="h1-title">FanPage</p>
-
-                <div class="fb-page" data-href="https://www.facebook.com/webtruyenonlinecom" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/webtruyenonlinecom"><a href="https://www.facebook.com/webtruyenonlinecom">Webtruyenonline</a></blockquote></div></div>
-                <p class="h1-title">Ads</p>
-                <p class="align-center">
-                    <a href="http://wepretty.vn" target="_blank"><img src="http://wepretty.vn/banner/bnr_wto.gif" style="max-width:100%" /></a>
-                </p>
-            </div>
+            
         </div>
 
         <div class="col-md-12">
             <p class="h1-title"><a href="truyen-hot/">Truyện xem nhiều</a></p>
             <div class="row">
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/thuong-an-phan-2.4476/"><img src="http://webtruyenonline.com/media/posters/th__ng__n___ph_n_2.jpeg" alt="Web truyện - Thượng Ẩn - Phần 2" title="Web truyện - Thượng Ẩn - Phần 2" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/thuong-an-phan-2.4476/" class="list-title " alt="Thượng Ẩn - Phần 2">Thượng Ẩn - Phần 2</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/sai-ke-dan.2643/">Sài Kê Đản</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                134<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/thuong-an.4421/"><img src="http://webtruyenonline.com/media/posters/th__ng__n%20%281%29.jpeg" alt="Web truyện - Thượng Ẩn" title="Web truyện - Thượng Ẩn" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/thuong-an.4421/" class="list-title " alt="Thượng Ẩn">Thượng Ẩn</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/sai-ke-dan.2643/">Sài Kê Đản</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                208<span class="full">Full</span>
-                            </p>
+                @foreach (var item in this.ViewBag.StoryView)
+                {
+                    <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="/Story?ActionCmd.StoryId=@item.StoryId"><img src="@item.Image" alt="@item.Name" title="@item.Name" class="img-thumbnail" /></a>
+                            </div>
+                            <div class="col-md-8">
+                                <h2><a href="/Story?ActionCmd.StoryId=@item.StoryId" class="list-title " alt="@item.Name">@item.Name</a></h2>
+                                <h3 class="index-genre">
+                                    <i class="fa fa-folder-open" aria-hidden="true"></i>
+                                    @{
+                                        var tags = new TagGetByIdAction();
+
+                                        tags.StoryId = item.StoryId;
+                                        var dataTag = tags.Execute().Data;
+                                    }
+                                    @foreach (var items in dataTag)
+                                    {
+                                        <a href="/category/@items.CategoryId">@items.Name</a>@string.Format(",")
+                                    }
+                                </h3>
+
+                                    <p>
+                                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                                        @item.TotalChapter<span class="full">@item.StatusName</span>
+                                    </p>
+</div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/the-bat-kha-dang.4868/"><img src="http://webtruyenonline.com/media/posters/th__b_t_kh____ng.jpeg" alt="Web truyện - Thế bất khả đáng" title="Web truyện - Thế bất khả đáng" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/the-bat-kha-dang.4868/" class="list-title " alt="Thế bất khả đáng">Thế bất khả đáng</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/sai-ke-dan.2643/">Sài Kê Đản</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                225<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/nghich-tap.4652/"><img src="http://webtruyenonline.com/media/posters/ngh_ch_t_p.jpeg" alt="Web truyện - Nghịch tập" title="Web truyện - Nghịch tập" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/nghich-tap.4652/" class="list-title " alt="Nghịch tập">Nghịch tập</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/sai-ke-dan.2643/">Sài Kê Đản</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                288<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/phong-mang.4836/"><img src="http://webtruyenonline.com/media/posters/phong_mang%20%281%29.jpeg" alt="Web truyện - Phong mang" title="Web truyện - Phong mang" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/phong-mang.4836/" class="list-title " alt="Phong mang">Phong mang</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/sai-ke-dan.2643/">Sài Kê Đản</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                313<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/hon-trom-55-lan.1583/"><img src="http://webtruyenonline.com/media/posters/h_n_tr_m_55_l_n.jpeg" alt="Web truyện - Hôn Trộm 55 Lần" title="Web truyện - Hôn Trộm 55 Lần" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/hon-trom-55-lan.1583/" class="list-title " alt="Hôn Trộm 55 Lần">Hôn Trộm 55 Lần</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/diep-phi-da.1091/">Diệp Phi Dạ</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                973<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/sieu-sao.5380/"><img src="http://webtruyenonline.com/media/posters/si_u_sao.jpeg" alt="Web truyện - Siêu Sao" title="Web truyện - Siêu Sao" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/sieu-sao.5380/" class="list-title " alt="Siêu Sao">Siêu Sao</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/do-thi.38/">Đô Thị</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/van-diet-chi-thuong.3137/">Vạn Diệt Chi Thương</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                295<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/song-trinh-mai-mai-mot-tinh-yeu.5076/"><img src="http://webtruyenonline.com/media/posters/song_tr_nh____m_i_m_i_m_t_t_nh_y_u%20%282%29.jpeg" alt="Web truyện - Song trình  - Mãi Mãi Một Tình Yêu" title="Web truyện - Song trình  - Mãi Mãi Một Tình Yêu" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/song-trinh-mai-mai-mot-tinh-yeu.5076/" class="list-title " alt="Song trình  - Mãi Mãi Một Tình Yêu">Song trình - Mãi Mãi Một Tình Yêu</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/lam-lam.1960/">Lam Lâm</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                92<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/sung-the-chi-dao.5904/"><img src="http://webtruyenonline.com/media/posters/s_ng_th__chi___o.jpeg" alt="Web truyện - Sủng Thê Chi Đạo" title="Web truyện - Sủng Thê Chi Đạo" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/sung-the-chi-dao.5904/" class="list-title " alt="Sủng Thê Chi Đạo">Sủng Thê Chi Đạo</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/do-thi.38/">Đô Thị</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/duan-gia.3378/">Duẫn Gia</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                140<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/cau-la-nam-to-van-yeu.2853/"><img src="http://webtruyenonline.com/media/posters/c_u_l__nam_t__v_n_y_u%20%281%29.jpeg" alt="Web truyện - Cậu Là Nam Tớ Vẫn Yêu" title="Web truyện - Cậu Là Nam Tớ Vẫn Yêu" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/cau-la-nam-to-van-yeu.2853/" class="list-title " alt="Cậu Là Nam Tớ Vẫn Yêu">Cậu Là Nam Tớ Vẫn Yêu</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/angelina.1691/">Angelina</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                116<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/xuyen-viet-chi-mien-vi-ky-nam.7243/"><img src="http://webtruyenonline.com/media/posters/xuy_n_vi_t_chi_mi_n_vi_k__nam%20%281%29.jpeg" alt="Web truyện - Xuyên việt chi miễn vi kỳ nam" title="Web truyện - Xuyên việt chi miễn vi kỳ nam" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/xuyen-viet-chi-mien-vi-ky-nam.7243/" class="list-title " alt="Xuyên việt chi miễn vi kỳ nam">Xuyên việt chi miễn vi kỳ nam</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/co-dai.30/">Cổ Đại</a>,
-                                <a href="the-loai/dien-van.33/">Điền Văn</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/lien-tich-ngung-mau.4115/">Liên Tích Ngưng Mâu</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                222<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/cau-la-nam-thi-toi-van-yeu-2.5856/"><img src="http://webtruyenonline.com/media/posters/c_u_l__nam_th__t_i_v_n_y_u_2.jpeg" alt="Web truyện - Cậu là nam thì tôi vẫn yêu 2" title="Web truyện - Cậu là nam thì tôi vẫn yêu 2" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/cau-la-nam-thi-toi-van-yeu-2.5856/" class="list-title " alt="Cậu là nam thì tôi vẫn yêu 2">Cậu là nam thì tôi vẫn yêu 2</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/do-thi.38/">Đô Thị</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/angelina.1691/">Angelina</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                175<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/chi-muon-lam-nguoi-dan-ong-cua-em.4944/"><img src="http://webtruyenonline.com/media/posters/ch__mu_n_l_m_ng__i___n__ng_c_a_em%20%281%29.jpeg" alt="Web truyện - Chỉ muốn làm người đàn ông của em" title="Web truyện - Chỉ muốn làm người đàn ông của em" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/chi-muon-lam-nguoi-dan-ong-cua-em.4944/" class="list-title " alt="Chỉ muốn làm người đàn ông của em">Chỉ muốn làm người đàn ông của em</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/angelina.1691/">Angelina</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                110<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/ke-hoach-yeu-chong-cua-tong-tai-ba-dao.6298/"><img src="http://webtruyenonline.com/media/posters/k__ho_ch_y_u_ch_ng_c_a_t_ng_t_i_b____o.jpeg" alt="Web truyện - Kế hoạch yêu chồng của Tổng tài bá đạo" title="Web truyện - Kế hoạch yêu chồng của Tổng tài bá đạo" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/ke-hoach-yeu-chong-cua-tong-tai-ba-dao.6298/" class="list-title " alt="Kế hoạch yêu chồng của Tổng tài bá đạo">Kế hoạch yêu chồng của Tổng tài bá đạo</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/oa-qua-oa.3373/">Oa Qua Oa</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                99<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/tieu-bao-boi-cua-bao-vuong.5678/"><img src="http://webtruyenonline.com/media/posters/ti_u_b_o_b_i_c_a_b_o_v__ng.jpeg" alt="Web truyện - Tiểu Bảo Bối Của Bạo Vương" title="Web truyện - Tiểu Bảo Bối Của Bạo Vương" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/tieu-bao-boi-cua-bao-vuong.5678/" class="list-title " alt="Tiểu Bảo Bối Của Bạo Vương">Tiểu Bảo Bối Của Bạo Vương</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/co-dai.30/">Cổ Đại</a>,
-                                <a href="the-loai/xuyen-khong.32/">Xuyên Không</a>,
-                                <a href="the-loai/sac.44/">Sắc</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/huyen-namida.3295/">Huyền Namida</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                31/NA
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/kim-bai-da-thu.6324/"><img src="http://webtruyenonline.com/media/posters/kim_b_i____th_%20%281%29.jpeg" alt="Web truyện - Kim Bài Đả Thủ" title="Web truyện - Kim Bài Đả Thủ" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/kim-bai-da-thu.6324/" class="list-title " alt="Kim Bài Đả Thủ">Kim Bài Đả Thủ</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/do-thi.38/">Đô Thị</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/phao-phao-tuyet-nhi.3577/">Phao Phao Tuyết Nhi</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                128<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/giang-ho-bien-dia-thi-ki-ba.2646/"><img src="http://webtruyenonline.com/media/posters/giang_h__bi_n___a_th__k__ba.jpeg" alt="Web truyện - Giang Hồ Biến Địa Thị Kì Ba" title="Web truyện - Giang Hồ Biến Địa Thị Kì Ba" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/giang-ho-bien-dia-thi-ki-ba.2646/" class="list-title " alt="Giang Hồ Biến Địa Thị Kì Ba">Giang Hồ Biến Địa Thị Kì Ba</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/co-dai.30/">Cổ Đại</a>,
-                                <a href="the-loai/xuyen-khong.32/">Xuyên Không</a>,
-                                <a href="the-loai/hai-huoc.35/">Hài Hước</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/ngu-tieu-lan-san.1816/">Ngữ Tiếu Lan San</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                171<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/fanfic-thuong-an-cuoc-song-hon-nhan.6066/"><img src="http://webtruyenonline.com/media/posters/_fanfic__th__ng__n___cu_c_s_ng_h_n_nh_n.jpeg" alt="Web truyện - [Fanfic] Thượng Ẩn - Cuộc sống hôn nhân" title="Web truyện - [Fanfic] Thượng Ẩn - Cuộc sống hôn nhân" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/fanfic-thuong-an-cuoc-song-hon-nhan.6066/" class="list-title " alt="[Fanfic] Thượng Ẩn - Cuộc sống hôn nhân">[Fanfic] Thượng Ẩn - Cuộc sống hôn nhân</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/do-thi.38/">Đô Thị</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/catherine.3470/">Catherine</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                82<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/mot-dem-me-loan-dai-ca-xa-hoi-den-dung-toi-day.1746/"><img src="http://webtruyenonline.com/media/posters/m_t___m_m__lo_n____i_ca_x__h_i__en___ng_t_i___y.jpeg" alt="Web truyện - Một Đêm Mê Loạn: Đại Ca Xã Hội Đen Đừng Tới Đây" title="Web truyện - Một Đêm Mê Loạn: Đại Ca Xã Hội Đen Đừng Tới Đây" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/mot-dem-me-loan-dai-ca-xa-hoi-den-dung-toi-day.1746/" class="list-title " alt="Một Đêm Mê Loạn: Đại Ca Xã Hội Đen Đừng Tới Đây">Một Đêm Mê Loạn: Đại Ca Xã Hội Đen Đừng Tới Đây</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/do-thi.38/">Đô Thị</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/chan-huyen-le.1199/">Chân Huyến Lệ</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                650<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-xs-6 col-sm-4 books-item heightLine-09">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="truyen/cong-tu-bien-bai-gia-tu.5348/"><img src="http://webtruyenonline.com/media/posters/c_ng_t__bi_n_b_i_gia_t_.jpeg" alt="Web truyện - Công Tử Biến Bại Gia Tử" title="Web truyện - Công Tử Biến Bại Gia Tử" class="img-thumbnail" /></a>
-                        </div>
-                        <div class="col-md-8">
-                            <h2><a href="truyen/cong-tu-bien-bai-gia-tu.5348/" class="list-title " alt="Công Tử Biến Bại Gia Tử">Công Tử Biến Bại Gia Tử</a></h2>
-                            <h3 class="index-genre">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a href="the-loai/ngon-tinh.23/">Ngôn tình</a>,
-                                <a href="the-loai/do-thi.38/">Đô Thị</a>,
-                                <a href="the-loai/dam-my.48/">Đam Mỹ</a>,
-                            </h3>
-                            <h4 class="index-author"><i class="fa fa-user" aria-hidden="true"></i> <a href="tac-gia/nguyet-ha-diep-anh.1441/">Nguyệt Hạ Điệp Ảnh</a></h4>
-                            <p>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                86<span class="full">Full</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                }
+
             </div>
         </div>
 

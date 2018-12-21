@@ -11,14 +11,9 @@ namespace Web.MVC.Models
     public class StoryGetByIdAction : CommandBase<dynamic>
     {
         public long? StoryId { get; set; }
-        private dynamic GetStory()
-        {
-            return Query.QuerySet<dynamic>("sp_Story_GetById", this).FirstOrDefault();
-        }
-        
         protected override Result<dynamic> ExecuteCore()
         {
-            return Success(this.GetStory());
+            return Success(Query.QuerySet<dynamic>("sp_Story_GetById", this).FirstOrDefault());
         }
     }
 }

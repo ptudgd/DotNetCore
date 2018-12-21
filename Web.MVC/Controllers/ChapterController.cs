@@ -12,23 +12,5 @@ namespace Web.MVC.Controllers
             var result = ActionCmd.Execute();
             return result;
         }
-        public Result<dynamic> GetById(ChapterGetByIdAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-        public Result Insert(ChapterInsertAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-        public Result Update(ChapterUpdateAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-        public Result DeleteById(ChapterDeleteByIdAction ActionCmd)
-        {
-            return ActionCmd.Execute();
-        }
-
-
     }
 }

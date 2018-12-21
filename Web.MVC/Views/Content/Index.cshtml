@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-box">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a itemprop="url" href="/"><span itemprop="title">Truyện</span></a>
+            </li>
+            <li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a itemprop="url" href="/Story?ActionCmd.StoryId=@this.ViewBag.Result.StoryId"><span itemprop="title">@this.ViewBag.Result.StoryName</span></a>
+            </li>
+            <li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a itemprop="url" href="/Content?ActionCmd.StoryId=@this.ViewBag.Result.StoryId&ActonCmd.ChapterId=@this.ViewBag.Result.ChapterId"><span itemprop="title">Chương - 1</span></a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="container read-book-ct">
+    <h2 class="book-name">@this.ViewBag.Result.StoryName</h2>
+    <h3 class="align-center">Tác giả : <a href="/Author?ActionCmd.AuthorId=@this.ViewBag.Result.AuthorId">@this.ViewBag.Result.AuthorName</a></h3>
+    <h4 class="align-center">@this.ViewBag.Result.ChapterName</h4>
+    
+    
+    <div class="container">
+        <center>
+        </center>
+        <center>
+        </center>
+    </div>
+    <div class="container" style="text-align:center">
+        <div id="contents" class="main-ct col-md-12">
+            @Html.Raw(this.ViewBag.Result.Content)
+        </div>
+        
+        <center>
+        </center>
+        <div class="cf">
+            <div class="fb-comments" data-href="http://webtruyenonline.com/truyen/thach-den-van-chuyen.3016/" data-version="v2.5" data-width="800" data-numposts="10"></div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var StoryTag = this.ViewBag.Tags;
+}
+
+<div class="breadcrumb-box">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a itemprop="url" href="/"><span itemprop="title">Truyện</span></a>
+            </li>
+            <li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a itemprop="url" href="truyen/thu-phuc-bao-boi.18777/"><span itemprop="title">Thu Phục Bảo Bối!</span></a>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="book-head">
+    <div class="container">
+        <div class="row cat-item head-item">
+            <div class="col-md-3">
+                <p><img src="@this.ViewBag.Result.Image" alt="@this.ViewBag.Result.Name" class="heightLine-00" /></p>
+            </div>
+            
+            <div class="col-md-9 ">
+                
+                <h2 class="book-cat-name">@this.ViewBag.Result.Name</h2>
+                <h3 class="cat-author">Tác giả: <a href="/Author?ActionCmd.AuthorId=@this.ViewBag.Result.AuthorId">Sweet 1995</a></h3>
+                
+                <h3 class="index-genre">
+                    Thể loại:
+                    @foreach(var item in StoryTag)
+                    {
+                        @item.Name
+                    }
+                </h3>
+                <p>
+                    Tổng chương : @this.ViewBag.Result.TotalChapter
+                    
+                </p>
+                <p>Lượt xem : @this.ViewBag.Result.View.ToString("#,##0")</p>
+                
+                <a href="/Content?ActionCmd.StoryId=@this.ViewBag.Result.StoryId" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-book pr-10"></span>Đọc truyện</a>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <center>
+        </center>
+        <div class="col-md-12">
+            <p class="h1-title">Giới thiệu</p>
+            <div class="book-desc">
+            </div>
+            <center>
+            </center>
+            <p class="h1-title">Danh sách chương (@this.ViewBag.Result.TotalChapter chương)</p>
+            <div class="table-responsive">
+                <table id="tbChapters" class="table table-striped table-hover table-condensed">
+                    <tr>
+                        <th>Chương</th>
+                        <th>Tên chương</th>
+                        <th>Cập nhật</th>
+                    </tr>
+                    @for (int i = 0; i < this.ViewBag.Chapter.Count; i++)
+                    {
+                        <tr>
+                            <td>Chương @{var dem = i + 1;@dem}</td>
+
+                           <td><h4 class="detail-chap-name"><a href="/Content?ActionCmd.StoryId=@this.ViewBag.Chapter[i].StoryId&ActionCmd.ChapterId=@this.ViewBag.Chapter[i].ChapterId">@this.ViewBag.Chapter[i].Name</a></h4></td>
+                            <td>
+                                @this.ViewBag.Result.EditDate.ToString("dd/MM/yyyy HH:mm:ss")
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            
+            <div class="cf">
+                <center>
+                    <br>
+                </center>
+            </div>
+            <div class="cf">
+                <div class="fb-comments" data-href="http://webtruyenonline.com/truyen/thu-phuc-bao-boi.18777/" data-version="v2.5" data-width="800" data-numposts="10"></div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+

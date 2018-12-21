@@ -12,7 +12,6 @@ namespace Web.MVC.Models
         public long? CurrentPage { get; set; }
         public long? Total { get; set; }
         public long? PageSize { get; set; }
-
         public string QuickSearch { get; set; }
         protected override void OnExecutingCore()
         {

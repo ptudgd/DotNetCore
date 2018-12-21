@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumb-box">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a itemprop="url" href="/"><span itemprop="title">Truyện</span></a>
+            </li>
+            <li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a itemprop="url" href="/Search"><span itemprop="title">Tìm Kiếm</span></a>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="container">
+    <div class="total">
+        <div class="row">
+            <div class="col-md-9 col-sm-6 col-xs-12"><p class="pl-20 pt-5">Có @this.ViewBag.Total truyện</p></div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var item in this.ViewBag.Data)
+        {
+            <div class="col-md-6 heightLine-00">
+                <div class="cat-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><a href="/Story?ActionCmd.StoryId=@item.StoryId"><img src="@item.Image" alt="@item.Name" /></a></p>
+                        </div>
+                        <div class="col-md-8">
+                            <h3 class="book-cat-name"><a href="/Story?ActionCmd.StoryId=@item.StoryId">@item.Name</a></h3>
+                            <h4 class="cat-author">Tác giả : <a href="/Author?ActionCmd.AuthorId=@item.AuthorId">@item.AuthorName</a></h4>
+                            <p>
+                                Thể loại:
+                                @{ 
+                                    var SearchTag = new TagGetByIdAction();
+                                    SearchTag.StoryId = item.StoryId;
+                                    foreach (var items in SearchTag.Execute().Data)
+                                    {
+                                        @items.Name @string.Format(", ");
+                                    }
+                                }
+                            </p>
+                            <p>
+                                Tổng chương: @item.TotalChapter
+                            </p>
+                            <p>Lượt xem : @item.View</p>
+                            
+                            <a href="/Story?ActionCmd.StoryId=@item.StoryId" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-book pr-10"></span>Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

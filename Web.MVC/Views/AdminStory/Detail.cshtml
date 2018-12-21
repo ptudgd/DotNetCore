@@ -8,7 +8,7 @@
 <div id="page-wrapper" style="min-height: 585px;">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Danh sách truyện</h1>
+            <h1 class="page-header">Danh sách chương</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -17,7 +17,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Danh sách truyện
+                    Danh sách chương
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -28,8 +28,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="dataTables_length" id="dataTables-example_length">
-                                    <a title="Thêm" href="#" type="button" class="btn btn-success btn-sm" >
-                                        <span class="glyphicon glyphicon-plus" ></span> Thêm
+                                    <a title="Thêm" href="#" type="button" class="btn btn-success btn-sm">
+                                        <span class="glyphicon glyphicon-plus"></span> Thêm
                                     </a>
                                     <label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label>
                                 </div>
@@ -54,17 +54,17 @@
                                         @foreach (var item in this.ViewBag.Result)
                                         {
                                             <tr class="gradeX odd" role="row">
-                                                <td class="">@item.StoryId</td>
+                                                <td class="">@item.ChapterId</td>
                                                 <td>@item.Name</td>
 
                                                 <td>
-                                                    <a title="Xem" href="/AdminStory/Detail?ActionCmd.StoryId=@item.StoryId" target="_blank" type="button" class="btn btn-default btn-sm " style=" ">
+                                                    <a title="Xem" href="/AdminStory/Detail?ActionCmd.StoryId=" type="button" class="btn btn-default btn-sm " style=" ">
                                                         <span class="glyphicon glyphicon-list-alt"></span> Xem
                                                     </a>
-                                                    <a title="Xóa" onclick="DeleteStory(@item.StoryId);" href="#" type="button" class="btn btn-danger btn-sm">
+                                                    <a title="Xóa" href="#" type="button" class="btn btn-danger btn-sm">
                                                         <span class="glyphicon glyphicon-remove"></span> Xóa
                                                     </a>
-                                                    <a title="Sửa" onclick="ShowModal('/AdminStory/GetById?ActionCmd.StoryId=@item.StoryId')" href="#" type="button" class="btn btn-warning btn-sm">
+                                                    <a title="Sửa" href="#" type="button" class="btn btn-warning btn-sm">
                                                         <span class="glyphicon glyphicon-edit"></span> Sửa
                                                     </a>
 

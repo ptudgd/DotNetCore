@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Web.MVC.Models
 {
-    public class HomeListAction<T> : CommandBase<List<T>> where T: class,new()
+    public class HomeViewAction<T> : CommandBase<List<T>> where T: class,new()
     {
         public long? CurrentPage { get; set; }
         public long? Total { get; set; }
@@ -20,7 +20,7 @@ namespace Web.MVC.Models
         }
         protected override Result<List<T>> ExecuteCore()
         {
-            var result = Query.QuerySet<T>("sp_Home_Search", this);
+            var result = Query.QuerySet<T>("sp_Home_View", this);
             return Success(result);
         }
 

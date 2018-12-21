@@ -23,14 +23,7 @@ as
 begin
 UPDATE [dbo].[Story]
    SET [Name] = @Name
-      ,[AuthorId] = @AuthorId
-      ,[WriteDate] = @WriteDate
-      ,[EditDate] = @EditDate
       ,[Image] = @Image
-      ,[Decription] = @Decription
-      ,[StatusId] = @StatusId
-      ,[isPublic] = @isPublic
-      ,[View] = @View
  WHERE [Story].StoryId = @StoryId
 
 end

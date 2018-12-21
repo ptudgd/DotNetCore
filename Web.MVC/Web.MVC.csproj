@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataHelper\DataHelper.csproj" />
+    <ProjectReference Include="..\DTO\DTO.csproj" />
     <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
 

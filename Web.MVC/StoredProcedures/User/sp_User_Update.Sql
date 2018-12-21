@@ -11,6 +11,8 @@ GO
 ALTER proc [dbo].sp_User_Update
 @UserId bigint,
 @Email nvarchar(max),
+@Name nvarchar(max),
+@Password nvarchar(max),
 @Image nvarchar(max),
 @FacebookId nvarchar(max),
 @LastLogin bigint,
@@ -27,6 +29,8 @@ UPDATE [dbo].[User]
       ,[Exp] = @Exp
       ,[Token] = @Token
       ,[Money] = @Money
+	  ,[Name] = @Name
+	  ,[Password] = @Password
  WHERE [User].UserId = @UserId
 
 end

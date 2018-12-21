@@ -11,6 +11,11 @@ namespace Web.MVC.Models
     {
         public long? StoryId { get; set; }
         public long? ChapterId { get; set; }
+        protected override void OnExecutingCore()
+        {
+            base.OnExecutingCore();
+            this.ChapterId = this.ChapterId ?? 1;
+        }
         protected override Result<dynamic> ExecuteCore()
         {
             var result = Query.QuerySet<dynamic>("sp_Content_GetById", this);
