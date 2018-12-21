@@ -21,6 +21,10 @@
                     <label>Hình ảnh</label>
                     <input type="text" id="Image" class="form-control" value="@this.ViewBag.Result.Image" />
                 </div>
+                <div>
+                    <label>Nội dung của truyện</label>
+                    <input type="text" id="Image" class="form-control" value="@this.ViewBag.Result.Decription" />
+                </div>
 
             </form>
         </div>
@@ -34,6 +38,7 @@
     function Save(id) {
         var Name = $("#Name").val();
         var Image = $("#Image").val();
+        var Decription = $('#Decription').val();
         $.post(
             '/AdminStory/StoryExecuteSave',
             {
@@ -41,7 +46,8 @@
                     Story: {
                         StoryId:id ,
                         Name: Name,
-                        Image: Image
+                        Image: Image,
+                        Decription: Decription
                     }
                 }
             }, function (result) {

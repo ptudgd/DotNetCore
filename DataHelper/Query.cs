@@ -142,7 +142,7 @@ namespace DataHelper
                                     item.SetValue(Parameter, Convert.ChangeType(data, propertyType), null);
                                 }
                             }
-                            catch (Exception e)
+                            catch (Exception )
                             {
 
                             }
